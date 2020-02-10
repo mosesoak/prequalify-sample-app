@@ -1,4 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
+import { qualifyFormChangeActionType } from './types';
 import {
   QualifyFormState,
   submitQFormErrorActionType,
@@ -16,6 +17,20 @@ const initialState: QualifyFormState = {
 };
 
 export const qualifyFormReducer = createReducer(initialState, (builder) => {
+  builder.addCase(qualifyFormChangeActionType, (state, action) => {
+    const { id, value } = action.payload;
+    switch (id) {
+      case 'price':
+      case 'annualIncome':
+      case 'creditScore':
+        const num = parseInt(value?.replace(/,/g, ''), 10);
+        state[id] = !isNaN(num) ? num : undefined;
+        break;
+      default:
+        state[id] = value;
+    }
+  });
+
   builder.addCase(submitQFormStartActionType, (state, action) => {
     state.loading = true;
     state.error = undefined;
