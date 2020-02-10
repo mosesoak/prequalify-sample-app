@@ -36,3 +36,24 @@
     transform: rotate(360deg);
   }
 }
+
+/* end cra, start custom selectors */
+
+form {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 10px;
+}
+
+label {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  column-gap: 10px;
+}
+
+.input-prefix {
+  width: 20px;
+  display: grid;
+  justify-items: right;
+  color: darkgray;
+}
