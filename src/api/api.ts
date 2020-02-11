@@ -2,20 +2,13 @@ import { CreateAcctResponse, PrequalifyResponse } from '.';
 import { CreateAcctState } from '../state/createAcct';
 import { QualifyFormState } from '../state/qualifyForm';
 
+// Endpoints may throw. Wrap calls in try/catch and handle errors appropriately.
 export const api = {
   prequalify: async (data: QualifyFormState) => {
-    try {
-      return await __prequalifyMockEndpoint(data);
-    } catch (e) {
-      return Promise.reject(e);
-    }
+    return await __prequalifyMockEndpoint(data);
   },
   createAccount: async (data: CreateAcctState) => {
-    try {
-      return await __createAccountMockEndpoint(data);
-    } catch (e) {
-      return Promise.reject(e);
-    }
+    return await __createAccountMockEndpoint(data);
   },
 };
 

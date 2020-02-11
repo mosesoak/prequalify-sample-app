@@ -10,14 +10,12 @@ import {
 const initialState: QualifyFormState = {
   loading: false,
 
-  /* 
   // for dev, uncomment these to prepopulate the form
-  price: 10000,
+  /* price: 10000,
   make: 'foo',
   model: 'bar',
   annualIncome: 123000,
-  creditScore: 800,
-  */
+  creditScore: 800, */
 };
 
 export const qualifyFormReducer = createReducer(initialState, (builder) => {
@@ -33,6 +31,7 @@ export const qualifyFormReducer = createReducer(initialState, (builder) => {
       default:
         state[id] = value;
     }
+    state.error = undefined;
   });
 
   builder.addCase(submitQualifyFormStart, (state, action) => {

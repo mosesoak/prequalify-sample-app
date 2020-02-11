@@ -23,7 +23,7 @@ export const submitCreateAcct = (): AppThunk => async (
     const result = await api.createAccount(getState().createAcctReducer);
     dispatch(submitCreateAcctSuccess(result));
   } catch (error) {
-    dispatch(submitCreateAcctError(error || 'Error submitting form!'));
+    dispatch(submitCreateAcctError(error.message || 'Error submitting form!'));
   }
 };
 

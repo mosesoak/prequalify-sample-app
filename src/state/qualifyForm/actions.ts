@@ -24,7 +24,7 @@ export const submitQualifyForm = (): AppThunk => async (
     const result = await api.prequalify(getState().qualifyFormReducer);
     dispatch(submitQualifySuccess(result));
   } catch (error) {
-    dispatch(submitQualifyError(error || 'Error submitting form!'));
+    dispatch(submitQualifyError(error.message || 'Error submitting form!'));
   }
 };
 
