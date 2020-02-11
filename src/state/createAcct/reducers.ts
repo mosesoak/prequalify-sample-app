@@ -1,11 +1,11 @@
 import { createReducer } from '@reduxjs/toolkit';
 import {
-  createAcctChangeActionType,
+  createAcctChange,
   CreateAcctState,
-  submitCAFormErrorActionType,
-  submitCAFormStartActionType,
-  submitCAFormSuccessActionType,
-} from './types';
+  submitCreateAcctError,
+  submitCreateAcctStart,
+  submitCreateAcctSuccess,
+} from './';
 
 const initialState: CreateAcctState = {
   loading: false,
@@ -14,24 +14,24 @@ const initialState: CreateAcctState = {
 };
 
 export const createAcctReducer = createReducer(initialState, (builder) => {
-  builder.addCase(createAcctChangeActionType, (state, action) => {
+  builder.addCase(createAcctChange, (state, action) => {
     const { id, value } = action.payload;
     if (id === 'username' || id === 'password') {
       state[id] = value || '';
     }
   });
 
-  builder.addCase(submitCAFormStartActionType, (state, action) => {
+  builder.addCase(submitCreateAcctStart, (state, action) => {
     state.loading = true;
     state.error = undefined;
   });
 
-  builder.addCase(submitCAFormSuccessActionType, (state, action) => {
+  builder.addCase(submitCreateAcctSuccess, (state, action) => {
     state.loading = false;
     state.error = undefined;
   });
 
-  builder.addCase(submitCAFormErrorActionType, (state, action) => {
+  builder.addCase(submitCreateAcctError, (state, action) => {
     state.loading = false;
     state.error = action.payload;
   });

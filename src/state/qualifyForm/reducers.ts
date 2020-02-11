@@ -1,23 +1,27 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { qualifyFormChangeActionType } from './types';
 import {
+  qualifyFormChange,
   QualifyFormState,
-  submitQFormErrorActionType,
-  submitQFormStartActionType,
-  submitQFormSuccessActionType,
-} from './types';
+  submitQualifyError,
+  submitQualifyFormStart,
+  submitQualifySuccess,
+} from './';
 
 const initialState: QualifyFormState = {
   loading: false,
-  price: 123,
+
+  /* 
+  // for dev, uncomment these to prepopulate the form
+  price: 10000,
   make: 'foo',
   model: 'bar',
-  annualIncome: 123,
-  creditScore: 123,
+  annualIncome: 123000,
+  creditScore: 800,
+  */
 };
 
 export const qualifyFormReducer = createReducer(initialState, (builder) => {
-  builder.addCase(qualifyFormChangeActionType, (state, action) => {
+  builder.addCase(qualifyFormChange, (state, action) => {
     const { id, value } = action.payload;
     switch (id) {
       case 'price':
@@ -31,17 +35,17 @@ export const qualifyFormReducer = createReducer(initialState, (builder) => {
     }
   });
 
-  builder.addCase(submitQFormStartActionType, (state, action) => {
+  builder.addCase(submitQualifyFormStart, (state, action) => {
     state.loading = true;
     state.error = undefined;
   });
 
-  builder.addCase(submitQFormSuccessActionType, (state, action) => {
+  builder.addCase(submitQualifySuccess, (state, action) => {
     state.loading = false;
     state.error = undefined;
   });
 
-  builder.addCase(submitQFormErrorActionType, (state, action) => {
+  builder.addCase(submitQualifyError, (state, action) => {
     state.loading = false;
     state.error = action.payload;
   });

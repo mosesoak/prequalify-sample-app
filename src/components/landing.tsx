@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { qualifyFormChange, QualifyFormState } from '../state/qualifyForm';
 import { submitQualifyForm } from '../state/qualifyForm/actions';
-import {
-  qualifyFormChangeActionType,
-  QualifyFormState,
-} from '../state/qualifyForm/types';
 import { AppState } from '../state/rootReducer';
 
 export const Landing = () => {
@@ -37,7 +34,7 @@ export const Landing = () => {
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
     const { id, value } = event.currentTarget;
     dispatch(
-      qualifyFormChangeActionType({
+      qualifyFormChange({
         id: id as keyof QualifyFormState,
         value: value,
       }),

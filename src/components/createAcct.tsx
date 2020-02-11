@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { submitCreateAcct } from '../state/createAcct/actions';
 import {
-  createAcctChangeActionType,
+  createAcctChange,
   CreateAcctState,
-} from '../state/createAcct/types';
+  submitCreateAcct,
+} from '../state/createAcct';
 import { AppState } from '../state/rootReducer';
 
 export const CreateAcct = () => {
@@ -31,7 +31,7 @@ export const CreateAcct = () => {
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
     const { id, value } = event.currentTarget;
     dispatch(
-      createAcctChangeActionType({
+      createAcctChange({
         id: id as keyof CreateAcctState,
         value: value,
       }),

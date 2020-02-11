@@ -1,21 +1,42 @@
-import { api } from '../../api/api';
+import { createAction } from '@reduxjs/toolkit';
+import { api, CreateAcctResponse } from '../../api';
 import { AppState } from '../rootReducer';
 import { AppDispatch, AppThunk } from '../store';
-import {
-  submitCAFormErrorActionType,
-  submitCAFormStartActionType,
-  submitCAFormSuccessActionType,
-} from './types';
+import { withPayloadType } from '../util';
+import { CreateAcctChangePayload } from './';
+
+// The pattern of storing form state in Redux isn't very scalable.
+// For a production build I might go with React Final Form.
+// For now a quick copy/paste from the qualifyForm will do!
+
+export const createAcctChange = createAction(
+  'CREATE_ACCT_FORM_CHANGE',
+  withPayloadType<CreateAcctChangePayload>(),
+);
 
 export const submitCreateAcct = (): AppThunk => async (
   dispatch: AppDispatch,
   getState: () => AppState,
 ) => {
-  dispatch(submitCAFormStartActionType());
+  dispatch(submitCreateAcctStart());
   try {
     const result = await api.createAccount(getState().createAcctReducer);
-    dispatch(submitCAFormSuccessActionType(result));
+    dispatch(submitCreateAcctSuccess(result));
   } catch (error) {
-    dispatch(submitCAFormErrorActionType(error || 'Error submitting form!'));
+    dispatch(submitCreateAcctError(error || 'Error submitting form!'));
   }
 };
+
+export const submitCreateAcctStart = createAction(
+  'SUBMIT_CREATE_ACCT_FORM_START',
+);
+
+export const submitCreateAcctSuccess = createAction(
+  'SUBMIT_CREATE_ACCT_FORM_SUCCESS',
+  withPayloadType<CreateAcctResponse>(),
+);
+
+export const submitCreateAcctError = createAction(
+  'SUBMIT_CREATE_ACCT_FORM_ERROR',
+  withPayloadType<string>(),
+);

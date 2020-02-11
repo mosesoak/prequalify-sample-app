@@ -1,6 +1,6 @@
-import { CreateAcctState } from '../state/createAcct/types';
-import { QualifyFormState } from '../state/qualifyForm/types';
-import { CreateAcctResponse, PrequalifyResponse } from './types';
+import { CreateAcctResponse, PrequalifyResponse } from '.';
+import { CreateAcctState } from '../state/createAcct';
+import { QualifyFormState } from '../state/qualifyForm';
 
 export const api = {
   prequalify: async (data: QualifyFormState) => {

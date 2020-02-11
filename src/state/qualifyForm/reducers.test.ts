@@ -1,5 +1,4 @@
-import { qualifyFormReducer } from './reducers';
-import { qualifyFormChangeActionType, QualifyFormState } from './types';
+import { qualifyFormChange, qualifyFormReducer, QualifyFormState } from './';
 
 // Shows how redux logic can be unit tested
 
@@ -17,7 +16,7 @@ describe('qualify form reducer', () => {
   it('should handle QUALIFY_FORM_CHANGE', () => {
     expect(
       qualifyFormReducer(initialState, {
-        type: qualifyFormChangeActionType.type,
+        type: qualifyFormChange.type,
         payload: {
           id: 'make',
           value: 'asdf',
@@ -31,7 +30,7 @@ describe('qualify form reducer', () => {
     // Number strings get converted properly
     expect(
       qualifyFormReducer(initialState, {
-        type: qualifyFormChangeActionType.type,
+        type: qualifyFormChange.type,
         payload: {
           id: 'price',
           value: '12,345',

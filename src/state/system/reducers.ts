@@ -1,13 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
-import {
-  submitQFormErrorActionType,
-  submitQFormSuccessActionType,
-} from '../qualifyForm/types';
-import { SystemState } from './types';
-import {
-  submitCAFormSuccessActionType,
-  submitCAFormErrorActionType,
-} from '../createAcct/types';
+import { submitCreateAcctError, submitCreateAcctSuccess } from '../createAcct';
+import { submitQualifyError, submitQualifySuccess } from '../qualifyForm';
+import { SystemState } from './';
 
 const initialState: SystemState = {
   isPrequalified: false,
@@ -15,22 +9,27 @@ const initialState: SystemState = {
   isLoggedIn: false,
 };
 
+// Action payload types are inferred (wow!) using addCase syntax:
+// https://redux-starter-kit.js.org/usage/usage-with-typescript#building-type-safe-reducer-argument-objects
+// RTK also uses Immer for succinct state updates:
+// https://redux-starter-kit.js.org/tutorials/intermediate-tutorial#mutable-update-logic
+
 export const systemReducer = createReducer(initialState, (builder) => {
-  builder.addCase(submitQFormSuccessActionType, (state, action) => {
+  builder.addCase(submitQualifySuccess, (state, action) => {
     state.isPrequalified = action.payload.is_qualified;
     state.notQualifiedReason = action.payload.reason;
   });
 
-  builder.addCase(submitQFormErrorActionType, (state, action) => {
+  builder.addCase(submitQualifyError, (state, action) => {
     state.isPrequalified = false;
     state.notQualifiedReason = undefined;
   });
 
-  builder.addCase(submitCAFormSuccessActionType, (state, action) => {
+  builder.addCase(submitCreateAcctSuccess, (state, action) => {
     state.isLoggedIn = action.payload.created;
   });
 
-  builder.addCase(submitCAFormErrorActionType, (state, action) => {
+  builder.addCase(submitCreateAcctError, (state, action) => {
     state.isLoggedIn = false;
   });
 });
