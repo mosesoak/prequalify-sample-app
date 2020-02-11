@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page renders correctly 1`] = `
+<form
+  id="qualify-form"
+  onSubmit={[Function]}
+>
+  <label>
+    Auto Price
+    <span
+      className="input-prefix"
+    >
+      $
+    </span>
+    <input
+      id="price"
+      onChange={[Function]}
+      required={true}
+      type="text"
+      value="123"
+    />
+  </label>
+  <label>
+    Auto Make
+    <span
+      className="input-prefix"
+    />
+    <input
+      id="make"
+      onChange={[Function]}
+      required={true}
+      type="text"
+      value="foo"
+    />
+  </label>
+  <label>
+    Auto Model
+    <span
+      className="input-prefix"
+    />
+    <input
+      id="model"
+      onChange={[Function]}
+      required={true}
+      type="text"
+      value="bar"
+    />
+  </label>
+  <label>
+    Your Estimated Annual Income
+    <span
+      className="input-prefix"
+    >
+      $
+    </span>
+    <input
+      id="annualIncome"
+      onChange={[Function]}
+      required={true}
+      type="text"
+      value={123}
+    />
+  </label>
+  <label>
+    Your Credit Score
+    <span
+      className="input-prefix"
+    />
+    <input
+      id="creditScore"
+      onChange={[Function]}
+      required={true}
+      type="text"
+      value="123"
+    />
+  </label>
+  <div>
+    <input
+      type="submit"
+      value="Submit Form"
+    />
+  </div>
+</form>
+`;
