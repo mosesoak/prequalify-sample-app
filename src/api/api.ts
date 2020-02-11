@@ -1,10 +1,18 @@
+import { CreateAcctState } from '../state/createAcct/types';
 import { QualifyFormState } from '../state/qualifyForm/types';
-import { PrequalifyResponse } from './types';
+import { CreateAcctResponse, PrequalifyResponse } from './types';
 
 export const api = {
   prequalify: async (data: QualifyFormState) => {
     try {
       return await __prequalifyMockEndpoint(data);
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  },
+  createAccount: async (data: CreateAcctState) => {
+    try {
+      return await __createAccountMockEndpoint(data);
     } catch (e) {
       return Promise.reject(e);
     }
@@ -35,6 +43,7 @@ async function __prequalifyMockEndpoint(
     setTimeout(() => {
       // first try: mock a thrown error to be sure we can handle it
       if (
+        !data ||
         !data.annualIncome ||
         !data.creditScore ||
         !data.make ||
@@ -60,4 +69,13 @@ async function __prequalifyMockEndpoint(
       resolve({ is_qualified: true });
     }, delaySeconds * 1000);
   });
+}
+
+async function __createAccountMockEndpoint(
+  data: CreateAcctState,
+): Promise<CreateAcctResponse> {
+  if (!data || !data.username || !data.password) {
+    return Promise.reject(badRequestMessage);
+  }
+  return Promise.resolve({ created: true });
 }

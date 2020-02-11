@@ -4,6 +4,10 @@ import {
   submitQFormSuccessActionType,
 } from '../qualifyForm/types';
 import { SystemState } from './types';
+import {
+  submitCAFormSuccessActionType,
+  submitCAFormErrorActionType,
+} from '../createAcct/types';
 
 const initialState: SystemState = {
   isPrequalified: false,
@@ -20,5 +24,13 @@ export const systemReducer = createReducer(initialState, (builder) => {
   builder.addCase(submitQFormErrorActionType, (state, action) => {
     state.isPrequalified = false;
     state.notQualifiedReason = undefined;
+  });
+
+  builder.addCase(submitCAFormSuccessActionType, (state, action) => {
+    state.isLoggedIn = action.payload.created;
+  });
+
+  builder.addCase(submitCAFormErrorActionType, (state, action) => {
+    state.isLoggedIn = false;
   });
 });
